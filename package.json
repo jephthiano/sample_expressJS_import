@@ -1,0 +1,61 @@
+{
+  "name": "Sample Api Express JS (Import)",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "author": "jephthah oladejo",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "start:worker": "node ./src/workers/index.js",
+    "dev": "nodemon server.js",
+    "dev:worker": "nodemon -r dotenv/config --config nodemon-worker.json"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bullmq": "^5.52.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.4.0",
+    "express-xss-sanitizer": "^1.2.0",
+    "helmet": "^7.1.0",
+    "ioredis": "^5.6.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.2",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.15",
+    "redis": "^5.1.1",
+    "validator": "^13.12.0",
+    "wwebjs-mongo": "^1.1.0",
+    "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "nodeman": "^1.1.2"
+  },
+  "imports": {
+    "#config/*": "./src/configs/*",
+    "#dto/*": "./src/dtos/*",
+    "#controller/*": "./src/controllers/*",
+    "#route/*": "./src/routes/*",
+    "#model/*": "./src/models/*",
+    "#database/*": "./src/databases/*",
+    "#service/*": "./src/services/*",
+    "#repository/*": "./src/repositories/*",
+    "#middleware/*": "./src/middlewares/*",
+    "#resource/*": "./src/resources/*",
+    "#queue/*": "./src/queues/*",
+    "#worker/*": "./src/workers/*",
+
+    "#core_util/*": "./src/utils/cores/*",
+    "#validator_util/*": "./src/utils/validators/*",
+    "#main_util/*": "./src/utils/mains/*"
+  }
+}
