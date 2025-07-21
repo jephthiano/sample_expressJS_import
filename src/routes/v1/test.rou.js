@@ -1,6 +1,6 @@
 import express from 'express';
-import { sendMessage } from '#main_util/messaging.util';
-import { hashPassword } from '#main_util/security.util';
+import { sendMessage } from '#main_util/messaging.util.js';
+import { hashPassword } from '#main_util/security.util.js';
 
 const router = new express.Router();
 

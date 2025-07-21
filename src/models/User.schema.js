@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { hashPassword, selEncrypt, generateUniqueId } from '#main_util/security.util';
+import { hashPassword, selEncrypt, generateUniqueId } from '#main_util/security.util.js';
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({

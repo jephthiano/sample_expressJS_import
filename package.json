@@ -9,8 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "start:worker": "node ./src/workers/index.js",
-    "dev": "nodemon server.js",
-    "dev:worker": "nodemon -r dotenv/config --config nodemon-worker.json"
+    "dev": "nodemon",
+    "dev:worker": "nodemon-worker"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -56,6 +56,7 @@
 
     "#core_util/*": "./src/utils/cores/*",
     "#validator_util/*": "./src/utils/validators/*",
-    "#main_util/*": "./src/utils/mains/*"
+    "#main_util/*": "./src/utils/mains/*",
+    "#service_util/*": "./src/utils/services/*"
   }
 }

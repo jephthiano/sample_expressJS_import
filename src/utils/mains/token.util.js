@@ -1,7 +1,7 @@
-import { triggerError} from '#core_util/handler.util';
-import { dbFindUnexpiredToken, dbDeleteToken, dbUpdateOrCeateToken, DbRenewToken } from '#database/mongo/token.db';
-import { redisGetUserIdByToken, redisDeleteToken, redisCreateToken, redisRenewToken, } from '#database/redis/token.db';
-import { createJwtToken, renewJwtToken, validateJwtToken } from '#service_util/validation/jwt';
+import { triggerError} from '#core_util/handler.util.js';
+import { dbFindUnexpiredToken, dbDeleteToken, dbUpdateOrCeateToken, DbRenewToken } from '#database/mongo/token.db.js';
+import { redisGetUserIdByToken, redisDeleteToken, redisCreateToken, redisRenewToken, } from '#database/redis/token.db.js';
+import { createJwtToken, renewJwtToken, validateJwtToken } from '#service_util/validation/jwt.js';
 
 // Generate Token with expiration
 const setApiToken = async (id) => {

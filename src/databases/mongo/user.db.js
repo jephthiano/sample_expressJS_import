@@ -1,7 +1,7 @@
-import { findSingleValue } from '#database/mongo/general.db';
-import User from '#model/User.schema';
-import { selEncrypt, selDecrypt }  from '#main_util/security.util';
-import { createUserDTO, updatePasswordDTO } from '#dto/user.dto';
+import { findSingleValue } from '#database/mongo/general.db.js';
+import User from '#model/User.schema.js';
+import { selEncrypt, selDecrypt }  from '#main_util/security.util.js';
+import { createUserDTO, updatePasswordDTO } from '#dto/user.dto.js';
 
 const findUserByID = async (userId) => {
     return await User.findOne({ _id: userId});

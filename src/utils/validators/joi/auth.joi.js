@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const loginJoi = Joi.object({
     login_id: Joi.string().trim().required().messages({
@@ -29,4 +29,4 @@ const verifyOtpJoi = Joi.object({
         }),
 });
 
-module.exports = { loginJoi, verifyOtpJoi };
+export { loginJoi, verifyOtpJoi };

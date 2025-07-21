@@ -1,4 +1,4 @@
-import { ValidationError, CustomApiException } from '#core_util/errors.util';
+import { ValidationError, CustomApiException } from '#core_util/errors.util.js';
 
 /**
  * Send a standardized JSON response.

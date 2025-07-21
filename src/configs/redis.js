@@ -5,7 +5,7 @@ import { log } from '#main_util/logger.util.js'; // adjust if your alias or path
 const logInfo = (type, data) => log(type, data, 'info');
 const logError = (type, data) => log(type, data, 'error');
 
-export const redis = new Redis({
+const redis = new Redis({
     host: process.env.REDIS_HOST,
     port: parseInt(process.env.REDIS_PORT),
     maxRetriesPerRequest: null,

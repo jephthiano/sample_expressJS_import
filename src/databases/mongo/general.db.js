@@ -1,7 +1,7 @@
-import User from '#model/User.schema';
-import OtpToken from '#model/OtpToken.schema';
-import Token from '#model/Token.schema';
-import { triggerError} from '#core_util/handler.util';
+import User from '#model/User.schema.js';
+import OtpToken from '#model/OtpToken.schema.js';
+import Token from '#model/Token.schema.js';
+import { triggerError} from '#core_util/handler.util.js';
 
 const findSingleValue = async (coll, field, param, select) => {
     const model = getModel(coll); // Get model dynamically

@@ -1,8 +1,8 @@
-import { queueMessaging } from '#queue/messagingQueue';
-import EmailService from '#service_util/messaging/EmailService';
-import SmsService from '#service_util/messaging/SmsService';
-import WhatsAppService from '#service_util/messaging/WhatsAppService';
-import PushNotificationService from '#service_util/messaging/PushNotificationService';
+import { queueMessaging } from '#queue/messagingQueue.js';
+import EmailService from '#service_util/messaging/EmailService.js';
+import SmsService from '#service_util/messaging/SmsService.js';
+import WhatsAppService from '#service_util/messaging/WhatsAppService.js';
+import PushNotificationService from '#service_util/messaging/PushNotificationService.js';
 
 
 const sendMessage = async (data, type) => {

@@ -1,7 +1,7 @@
 import { Worker } from 'bullmq';
-import { redis } from '#config/redis'; 
-import { deleteOtp } from '#main_util/otp.util';
-import { log } from '#main_util/logger.util';
+import { redis } from '#config/redis.js'; 
+import { deleteOtp } from '#main_util/otp.util.js';
+import { log } from '#main_util/logger.util.js';
 
 const logInfo = (type, data) => log(type, data, 'info');
 const logError = (type, data) => log(type, data, 'error');

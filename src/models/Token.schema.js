@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { selEncrypt } from '#main_util/security.util';
+import { selEncrypt } from '#main_util/security.util.js';
 const { Schema } = mongoose;
 
 const TokenSchema = new Schema({

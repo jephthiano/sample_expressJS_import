@@ -1,4 +1,4 @@
-import { sendResponse, handleException, triggerError, triggerValidationError, } from '#core_util/handler.util';
+import { sendResponse, handleException, triggerError, triggerValidationError, } from '#core_util/handler.util.js';
 
 class BaseController {
   static sendResponse           = sendResponse;

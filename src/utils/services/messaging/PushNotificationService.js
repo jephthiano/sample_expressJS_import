@@ -1,5 +1,5 @@
-import { sendMessageDTO } from '#dto/messaging.dto';
-import { log } from '#main_util/logger.util';
+import { sendMessageDTO } from '#dto/messaging.dto.js';
+import { log } from '#main_util/logger.util.js';
 
 const logInfo = (type, data) => log(type, data, 'info');
 const logError = (type, data) => log(type, data, 'error');

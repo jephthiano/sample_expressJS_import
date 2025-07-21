@@ -1,7 +1,7 @@
-import { isDateLapsed } from '#main_util/general.util';
-import { generateUniqueId, verifyPassword } from '#main_util/security.util';
-import { sendMessage } from '#main_util/messaging.util';
-import { findOneOtpData, storeOtp, updateOtpStatus, deleteManyOtp }from '#database/mongo/otp.db';
+import { isDateLapsed } from '#main_util/general.util.js';
+import { generateUniqueId, verifyPassword } from '#main_util/security.util.js';
+import { sendMessage } from '#main_util/messaging.util.js';
+import { findOneOtpData, storeOtp, updateOtpStatus, deleteManyOtp }from '#database/mongo/otp.db.js';
 
 // SEND OTP
 const sendOtp = async (messageData) => {

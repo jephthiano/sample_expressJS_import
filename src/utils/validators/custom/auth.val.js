@@ -1,6 +1,6 @@
-import { findUserByEmailOrPhone , findEmailMobileNumberUsername} from '#database/mongo/user.db';
-import { isEmptyObject, isEmptyString, replaceValues, isPhoneSample } from '#main_util/general.util';
-import { validateInput, validatePassword } from '#main_util/security.util';
+import { findUserByEmailOrPhone , findEmailMobileNumberUsername} from '#database/mongo/user.db.js';
+import { isEmptyObject, isEmptyString, replaceValues, isPhoneSample } from '#main_util/general.util.js';
+import { validateInput, validatePassword } from '#main_util/security.util.js';
 
 // Utility function for response formatting
 const formatResponse = (errors) => ({

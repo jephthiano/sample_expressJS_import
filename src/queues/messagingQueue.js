@@ -1,5 +1,5 @@
 import { Queue } from 'bullmq';
-import { redis } from '#config/redis'; 
+import { redis } from '#config/redis.js'; 
 
 const messagingQueue = new Queue('messagingQueue', {
   connection: redis.duplicate(), // ensures a clean connection for the Queue

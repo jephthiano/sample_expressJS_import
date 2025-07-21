@@ -1,8 +1,8 @@
-import BaseController from '#controller/BaseController.cla';
-import AuthService from '#service/v1/AuthService.cla';
-import { register, sendOtp, verifyOtp, signup, resetPassword} from '#validator_util/custom/auth.val';
-import { loginJoi } from '#validator_util/joi/auth.joi';
-import { parseMessageToObject } from '#main_util/general.util';
+import BaseController from '#controller/BaseController.cla.js';
+import AuthService from '#service/v1/AuthService.cla.js';
+import { register, sendOtp, verifyOtp, signup, resetPassword} from '#validator_util/custom/auth.val.js';
+import { loginJoi } from '#validator_util/joi/auth.joi.js';
+import { parseMessageToObject } from '#main_util/general.util.js';
 
 
 class AuthController extends BaseController{

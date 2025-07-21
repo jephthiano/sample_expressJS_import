@@ -1,11 +1,11 @@
-import AuthRepository from '#repository/AuthRepository.cla';
-import FetchController from '#controller/v1/FetchController.cla';
-import { verifyPassword, validateInput }  from '#main_util/security.util';
-import { sendOtp, verifyNewOtp, verifyUsedOtp}  from '#main_util/otp.util';
-import { queueDeleteOtp } from '#queue/deleteOtpQueue';
-import { sendMessage } from '#main_util/messaging.util';
-import { deleteApiToken } from '#main_util/token.util';
-import { triggerError} from '#core_util/handler.util';
+import AuthRepository from '#repository/AuthRepository.cla.js';
+import FetchController from '#controller/v1/FetchController.cla.js';
+import { verifyPassword, validateInput }  from '#main_util/security.util.js';
+import { sendOtp, verifyNewOtp, verifyUsedOtp}  from '#main_util/otp.util.js';
+import { queueDeleteOtp } from '#queue/deleteOtpQueue.js';
+import { sendMessage } from '#main_util/messaging.util.js';
+import { deleteApiToken } from '#main_util/token.util.js';
+import { triggerError} from '#core_util/handler.util.js';
 
 
 class AuthService{

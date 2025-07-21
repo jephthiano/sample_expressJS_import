@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { sendMessageDTO } from '#dto/messaging.dto';
+import { sendMessageDTO } from '#dto/messaging.dto.js';
 
 class EmailService {
     static transporter = nodemailer.createTransport({

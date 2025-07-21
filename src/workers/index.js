@@ -1,7 +1,7 @@
-import { connectDB, mongoose } from '#utils/database.js'; // adjust if alias differs
 import dotenv from 'dotenv';
-import { log } from '#utils/logger.util.js'; // same here
 dotenv.config();
+import { connectDB, mongoose } from '#utils/database.js'; // adjust if alias differs
+import { log } from '#utils/logger.util.js'; // same here
 
 // Import workers — these will run once connected to DB
 import '#worker/messagingWorker.js';

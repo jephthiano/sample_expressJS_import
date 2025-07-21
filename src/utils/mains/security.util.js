@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import cryptoJS from 'crypto-js';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
-import { queueRehash } from '@queue/rehashQueue';
+import { queueRehash } from '#queue/rehashQueue.js';
 
 const key = process.env.ENC_KEY;
 const iv = process.env.ENC_IV;

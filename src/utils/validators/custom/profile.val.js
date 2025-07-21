@@ -1,6 +1,6 @@
-import { isEmptyObject, isEmptyString } from '#main_util/general.util';
-import { validateInput } from '#main_util/security.util';
-import { findUserSingleValuebyEncField, }from '#database/mongo/user.db';
+import { isEmptyObject, isEmptyString } from '#main_util/general.util.js';
+import { validateInput } from '#main_util/security.util.js';
+import { findUserSingleValuebyEncField, }from '#database/mongo/user.db.js';
 
 // Utility function for response formatting
 const formatResponse = (errors) => ({

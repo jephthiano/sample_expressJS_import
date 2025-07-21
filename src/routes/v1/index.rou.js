@@ -1,9 +1,9 @@
 import express from 'express';
-import auth from '#route/v1/auth.rou';
-import fetch from '#route/v1/fetch.rou';
-import test from '#route/v1/test.rou';
-import { tokenValidator } from '#middleware/tokenValidator';
-import { returnNotFound} from '#core_util/handler.util';
+import auth from '#route/v1/auth.rou.js';
+import fetch from '#route/v1/fetch.rou.js';
+import test from '#route/v1/test.rou.js';
+import { tokenValidator } from '#middleware/tokenValidator.js';
+import { returnNotFound} from '#core_util/handler.util.js';
 
 const router = new express.Router();
 

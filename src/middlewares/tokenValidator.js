@@ -1,6 +1,6 @@
-import { validateApiToken } from '#main_util/token.util';
-import { handleException, triggerError} from '#core_util/handler.util';
-import { findUserByID } from '#database/mongo/user.db';
+import { validateApiToken } from '#main_util/token.util.js';
+import { handleException, triggerError} from '#core_util/handler.util.js';
+import { findUserByID } from '#database/mongo/user.db.js';
 
 
 // Middleware to verify token and attach user data to `req`

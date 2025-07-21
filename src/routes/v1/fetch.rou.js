@@ -1,5 +1,5 @@
 import express from 'express';
-import FetchController from '#controller/v1/FetchController.cla';
+import FetchController from '#controller/v1/FetchController.cla.js';
 
 const router = new express.Router();
 

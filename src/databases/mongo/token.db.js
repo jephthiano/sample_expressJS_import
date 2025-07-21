@@ -1,6 +1,6 @@
-import Token from '#model/Token.schema';
-import { selEncrypt }  from '#main_util/security.util';
-import { generateUniqueToken }  from '#main_util/security.util';
+import Token from '#model/Token.schema.js';
+import { selEncrypt }  from '#main_util/security.util.js';
+import { generateUniqueToken }  from '#main_util/security.util.js';
 
 const tokenExpiry = parseInt(process.env.TOKEN_EXPIRY);
 

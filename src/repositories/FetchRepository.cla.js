@@ -1,4 +1,4 @@
-import { findUserByID } from '#database/mongo/user.db';
+import { findUserByID } from '#database/mongo/user.db.js';
 
 class FetchRepository
 {

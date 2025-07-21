@@ -1,4 +1,4 @@
-import { ucFirst }  from '#main_util/general.util';
+import { ucFirst }  from '#main_util/general.util.js';
 
 // pass [first_name, receiving_medium, send_medium, type and misc]
 function sendMessageDTO(data) {

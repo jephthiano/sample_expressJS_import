@@ -1,6 +1,6 @@
-import { redis } from '#config/redis'; 
-import { selEncrypt }  from '#main_util/security.util';
-import { generateUniqueToken }  from '#main_util/security.util';
+import { redis } from '#config/redis.js'; 
+import { selEncrypt }  from '#main_util/security.util.js';
+import { generateUniqueToken }  from '#main_util/security.util.js';
 
 const tokenExpiry = parseInt(process.env.TOKEN_EXPIRY)
  

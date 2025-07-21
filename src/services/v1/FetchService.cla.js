@@ -1,7 +1,7 @@
-import FetchRepository from '#repository/FetchRepository.cla';
-import { setApiToken, getApiToken } from '#main_util/token.util';
-import UserResource from '#resource/UserResource';
-import { triggerError} from '#core_util/handler.util';
+import FetchRepository from '#repository/FetchRepository.cla.js';
+import { setApiToken, getApiToken } from '#main_util/token.util.js';
+import UserResource from '#resource/UserResource.js';
+import { triggerError} from '#core_util/handler.util.js';
 
 
 class FetchService{

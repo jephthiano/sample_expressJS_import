@@ -1,4 +1,4 @@
-import { findUserByEmailOrPhone, createUserAccount, resetUserPaswword } from '#database/mongo/user.db';
+import { findUserByEmailOrPhone, createUserAccount, resetUserPaswword } from '#database/mongo/user.db.js';
 
 class AuthRepository
 {

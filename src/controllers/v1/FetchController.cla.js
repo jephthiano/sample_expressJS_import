@@ -1,5 +1,5 @@
-import BaseController from '#controller/BaseController.cla';
-import FetchService from '#service/v1/FetchService.cla';
+import BaseController from '#controller/BaseController.cla.js';
+import FetchService from '#service/v1/FetchService.cla.js';
 
 
 class FetchController extends BaseController{

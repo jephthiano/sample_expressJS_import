@@ -1,5 +1,5 @@
 import { Queue } from 'bullmq';
-import { redis } from '#config/redis'; 
+import { redis } from '#config/redis.js'; 
 
 const deleteOtpQueue = new Queue('deleteOtpQueue', {
   connection: redis.duplicate(), // ensures a clean connection for the Queue

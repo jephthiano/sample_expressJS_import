@@ -5,7 +5,7 @@ import { log } from '#main_util/logger.util.js'; // adjust if your alias or path
 const logInfo = (type, data) => log(type, data, 'info');
 const logError = (type, data) => log(type, data, 'error');
 
-export const connectDB = async () => {
+const connectDB = async () => {
     try {
         const conn = await mongoose.connect(process.env.MONGODB_URI);
         logInfo("DATABASE CONFIG", `✅ Database connected: ${conn.connection.host}`);
