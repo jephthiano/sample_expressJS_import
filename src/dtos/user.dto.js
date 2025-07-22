@@ -1,14 +1,22 @@
-function createUserDTO(data) {
-    const  veriType = data.veri_type; let email; let mobile_number; 
-    let email_verified_at = null; let mobile_number_verified_at = null
+import { validateInput }  from '#main_util/security.util.js';
 
-    if(!veriType){
+function createUserDTO(data) {
+    const veriType = data.receiving_medium 
+                ? validateInput(data.receiving_medium) ? 'mobile_number' : 'email'
+                : null ;
+                
+    let email; let mobile_number; 
+    let email_verified_at = null; let mobile_number_verified_at = null
+    
+    if(veriType){
         if (veriType === 'email') {
             email_verified_at = new Date();
-            email = receiving_medium;
+            email = data.receiving_medium;
+            mobile_number = data.mobile_number?.trim();
         } else {
             mobile_number_verified_at = new Date();
-            mobile_number = receiving_medium;
+            mobile_number = data.receiving_medium;
+            email = data.email?.trim().toLowerCase();
         }
     }else{
         email = data.email?.trim().toLowerCase();
