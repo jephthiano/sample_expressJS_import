@@ -82,22 +82,13 @@ class AuthService{
 
     static async signup(req) {
         const { receiving_medium, code, first_name, email } = req.body;
-        const veriType = validateInput(receiving_medium) ? 'mobile_number' : 'email';
+        req.body.veri_type = validateInput(receiving_medium) ? 'mobile_number' : 'email';
     
         const verifyOtp = await verifyUsedOtp({ receiving_medium, use_case: 'sign_up', code });
             
         if(!verifyOtp) triggerError("Invalid Request", [], 403);
 
         if (verifyOtp === 'expired') triggerError("Request timeout, try again", []);
-
-        // Mark verification based on type and set the other field not set from form
-        if (veriType === 'email') {
-            req.body.email_verified_at = new Date();
-            req.body.mobile_number = receiving_medium;
-        } else {
-            req.body.mobile_number_verified_at = new Date();
-            req.body.email = receiving_medium;
-        }
 
         // Create user
         const user = await AuthRepository.createUser(req.body);

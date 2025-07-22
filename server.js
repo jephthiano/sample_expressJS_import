@@ -1,6 +1,4 @@
-// server.js
-import dotenv from 'dotenv';
-dotenv.config(); // Load environment variables
+import '#config/env.js';
 import express from 'express';
 import { connectDB, mongoose } from '#config/database.js';// Connect to DB
 import v1RouteEntry from '#route/v1/index.rou.js';// Route entry
@@ -11,6 +9,7 @@ const app = express();
 applyMiddleware(app);// Apply middlewares
 
 const startServer = async () => {
+
   try {
     await connectDB();
 
