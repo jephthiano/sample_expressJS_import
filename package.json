@@ -9,8 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "start:worker": "node ./src/workers/index.js",
-    "dev": "nodemon",
-    "dev:worker": "nodemon-worker"
+    "dev": "nodemon server.js",
+    "dev:worker": "nodemon ./src/workers/index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

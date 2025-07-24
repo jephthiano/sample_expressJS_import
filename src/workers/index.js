@@ -9,10 +9,10 @@ import '#worker/deleteOtpWorker.js';
 
 // Connect DB and manage graceful shutdown
 connectDB().then(() => {
-    log('ENTRY POINT', '✅ Workers initialized and DB connected', 'info');
+    log('WORKER ENTRY POINT', '✅ Workers initialized and DB connected', 'info');
 
     process.on('SIGINT', async () => {
-        log('ENTRY POINT', '🛑 Shutting down worker process...', 'error');
+        log('WORKER ENTRY POINT', '🛑 Shutting down worker process...', 'error');
         await mongoose.disconnect();
         process.exit(0);
     });
