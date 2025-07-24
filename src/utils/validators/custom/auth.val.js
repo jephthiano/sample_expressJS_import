@@ -84,8 +84,8 @@ const register = async (inputs, regType) => {
 const sendOtp = async (inputs, type) => {
     const errors = {};
     const { receiving_medium } = inputs;
-    const veriType = isPhoneSample(receiving_medium) ? 'mobile_number' : 'email';
-    const resType = replaceValues(veriType, '_', ' ')
+    const mediumType = isPhoneSample(receiving_medium) ? 'mobile_number' : 'email';
+    const resType = replaceValues(mediumType, '_', ' ')
 
     if (type === 'sign_up') {
         const data_exists = await findUserByEmailOrPhone(receiving_medium);
@@ -94,7 +94,7 @@ const sendOtp = async (inputs, type) => {
             errors.receiving_medium = "field is required";
         } else if (data_exists) { // if data is in db
             errors.receiving_medium = `${resType} already taken`;
-        } else if (!validateInput(receiving_medium, veriType)) {
+        } else if (!validateInput(receiving_medium, mediumType)) {
             errors.receiving_medium = `invalid ${resType}`;
         }
     } else if (type === 'forgot_password') {
