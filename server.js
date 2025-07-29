@@ -1,7 +1,7 @@
 import '#config/env.js';
 import { connectDB, mongoose } from '#config/database.js';// Connect to DB
 import { log } from '#main_util/logger.util.js';// Logger
-import app from './src/app.js'; // Import Express app
+import app from '#src/app.js'; // Import Express app
 
 const PORT = process.env.PORT || 5000;
 
