@@ -1,3 +1,12 @@
+import { triggerError} from '#core_util/handler.util.js';
+
+const getEnvorThrow = (key) => {
+    const val = process.env[key];
+    if (!val) triggerError("Your account has been suspended, contact admin", [], 500);
+    
+    return val;
+}
+
 const initialResponse = (type = 'invalid_request') => ({
     status: false,
     message: type === 'invalid_input' ? 'invalid inputs' : 'invalid request',
@@ -56,6 +65,7 @@ const parseMessageToObject = (error) => {
 };
 
 export {
+    getEnvorThrow,
     initialResponse,
     isEmptyObject,
     isEmptyArray,
