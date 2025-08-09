@@ -2,7 +2,7 @@ import { triggerError} from '#core_util/handler.util.js';
 
 const getEnvorThrow = (key) => {
     const val = process.env[key];
-    if (!val) triggerError("Your account has been suspended, contact admin", [], 500);
+    if (!val) triggerError("Error occurred on the server", [], 500);
     
     return val;
 }
