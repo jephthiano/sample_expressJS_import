@@ -3,12 +3,12 @@ import express from 'express';
 const router = new express.Router();
 
 //change username
-router.post('/change_username', async(req, res) => {
+router.post('/change_username', async (req, res) => {
     
 })
 
 //change email
-router.post('/change_email', async(req, res) => {
+router.post('/change_email', async (req, res) => {
     
 })
 
@@ -20,7 +20,7 @@ router.get('/send_otp', async (req, res) => {
 
 
 //verify otp
-router.post('/verify_otp', async(req,res) => {
+router.post('/verify_otp', async (req, res) => {
     
 })
 

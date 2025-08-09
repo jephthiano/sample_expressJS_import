@@ -4,7 +4,7 @@ import FetchController from '#controller/v1/FetchController.cla.js';
 const router = new express.Router();
 
 
-router.get('/refetch', async(req,res) => {
+router.get('/refetch', async (req, res) => {
     FetchController.appFetchData(req, res);
 });
 

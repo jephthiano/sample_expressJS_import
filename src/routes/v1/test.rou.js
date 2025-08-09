@@ -4,7 +4,7 @@ import { hashPassword } from '#main_util/security.util.js';
 
 const router = new express.Router();
 
-router.get('/messaging', async (req,res) => {
+router.get('/messaging', async (req, res) => {
     // for email
     // const messageData = {
     //     first_name: 'Jephthaooh',
@@ -41,7 +41,7 @@ router.get('/messaging', async (req,res) => {
     res.status(200).json({message:'working'});
 });
 
-router.get('/hash', async (req,res) => {
+router.get('/hash', async (req, res) => {
     const hash = await hashPassword('newPAss')
 });
 
