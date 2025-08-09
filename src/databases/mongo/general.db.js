@@ -3,11 +3,11 @@ import OtpToken from '#model/OtpToken.schema.js';
 import Token from '#model/Token.schema.js';
 import { triggerError} from '#core_util/handler.util.js';
 
-const findSingleValue = async (coll, field, param, select) => {
-    const model = getModel(coll); // Get model dynamically
-    if (!model) triggerError(`Model ${coll} not found`,[], 500);
+const findSingleValue = async (collectionName, whereField, whereValue, selectValue) => {
+    const model = getModel(collectionName); // Get model dynamically
+    if (!model) triggerError(`Error occurred on the server`,[], 500);
 
-    const result = await model.findOne({ [field]: param }, select);
+    const result = await model.findOne({ [whereField]: param }, selectValue);
     const response = result ? result[select] : null;
 
     return response;
@@ -15,7 +15,7 @@ const findSingleValue = async (coll, field, param, select) => {
 
 const updateSingleField = async (collectionName, whereField, whereValue, updateField, newValue) => {
     const model = getModel(collectionName); // dynamically resolve the Mongoose model
-    if (!model) triggerError(`Model ${coll} not found`,[], 500);
+    if (!model) triggerError(`Error occurred on the server`,[], 500);
 
     const result = await model.updateOne(
     { [whereField]: whereValue },
