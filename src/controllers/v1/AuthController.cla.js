@@ -89,6 +89,7 @@ class AuthController extends BaseController{
 
             const response =  await AuthService.signup(req);
 
+            setTokenCookie(res, response);
             this.sendResponse(res, response, "Account successfully created");
         } catch (error) {
             this.handleException(res, error);
