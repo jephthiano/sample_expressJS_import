@@ -25,7 +25,7 @@ const login = async (inputs) => {
 };
 
 // Registration
-const register = async (inputs, regType) => {
+const register = async (inputs) => {
     const errors = {};
     const {email, mobile_number, first_name, last_name, username, gender, password } = inputs;
 
@@ -84,7 +84,7 @@ const register = async (inputs, regType) => {
 const sendOtp = async (inputs, type) => {
     const errors = {};
     const { receiving_medium } = inputs;
-    const mediumType = isPhoneSample(receiving_medium) ? 'mobile_number' : 'email';
+    const mediumType = validateInput(receiving_medium, 'mobile_number') ? 'mobile_number' : 'email';
     const resType = replaceValues(mediumType, '_', ' ')
 
     if (type === 'sign_up') {
@@ -125,7 +125,7 @@ const verifyOtp = async (inputs) => {
 };
 
 // signup
-const signup = async (inputs, regType) => {
+const signup = async (inputs) => {
     const errors = {};
     const {receiving_medium, email, mobile_number, first_name, last_name, username, gender, password } = inputs;
 

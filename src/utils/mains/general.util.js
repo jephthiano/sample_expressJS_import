@@ -7,14 +7,6 @@ const getEnvorThrow = (key) => {
     return val;
 }
 
-const initialResponse = (type = 'invalid_request') => ({
-    status: false,
-    message: type === 'invalid_input' ? 'invalid inputs' : 'invalid request',
-    message_detail: '',
-    response_data: {},
-    error_data: {},
-});
-
 const isEmptyObject = (obj) => Object.keys(obj).length === 0;
 
 const isEmptyArray = (array) => Array.isArray(array) && array.length === 0;
@@ -28,23 +20,11 @@ const isEmptyString = (variable) => typeof variable === 'string' && variable.tri
 const inArray = (value, array) => array.includes(value);
 
 const isValidData = (data) => !(data === undefined || data === null || data === '');
-
-const isPhoneSample = (value) => /^0?\d*$/.test(value.trim());
-
-const detectInputType = (value) => {
-    // Looks like a phone number if it starts with digits (even with leading zero)
-    if (/^0?\d*$/.test(value.trim())) {
-      return 'phone';
-    }
-  
-    return 'unknown';
-  };
   
 const replaceValues = (data, value, replace) => {
     const regex = new RegExp(value, 'g');
     return data.replace(regex, replace);
 };
-  
 
 const isNumber = (value) => !isNaN(value) && typeof Number(value) === "number" && Number.isFinite(value);
 
@@ -55,8 +35,8 @@ const isDateLapsed = (givenDate, duration = 0, checkDate = new Date()) => {
     return new Date(givenDate).getTime() + milliDuration < checkDate.getTime();
 };
 
-const parseMessageToObject = (error) => {
-    const errors = error.details.reduce((acc, err) => {
+const parseMessageToObject = (errorDetails) => {
+    const errors = errorDetails.reduce((acc, err) => {
         acc[err.path[0]] = err.message; // Assign each field's error message
         return acc;
     }, {});
@@ -66,7 +46,6 @@ const parseMessageToObject = (error) => {
 
 export {
     getEnvorThrow,
-    initialResponse,
     isEmptyObject,
     isEmptyArray,
     isObject,
@@ -74,11 +53,9 @@ export {
     isEmptyString,
     inArray,
     isValidData,
-    isPhoneSample,
     replaceValues,
     isNumber,
     ucFirst,
     isDateLapsed,
     parseMessageToObject,
-    detectInputType,
 };
