@@ -7,8 +7,8 @@ import { triggerError} from '#core_util/handler.util.js';
 
 // IS IT VALID OTP MEDIUM
 
-const isValidOtpMedium =  async (type) => {
-    return in_array(['forgot_password','sign_up'], type)
+const isValidOtpParam =  async (type) => {
+    return ['sign_up', 'forgot_password'].includes(type);
 }
 
 
@@ -77,7 +77,7 @@ const deleteOtp = async (receiving_medium) => {
 };
 
 export {
-    isValidOtpMedium
+    isValidOtpParam,
     sendOtp,
     verifyNewOtp,
     verifyUsedOtp,
