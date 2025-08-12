@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 
 // Define Schema
-const OtpTokenSchema = new Schema({
+const OtpSchema = new Schema({
     receiving_medium: { 
         type: String,
         unique: true,
@@ -58,7 +58,7 @@ async function transformOtpUpdate(update) {
 }
 
 // Pre-save
-OtpTokenSchema.pre('save', async function (next) {
+OtpSchema.pre('save', async function (next) {
     if (this.isModified('code') && !this.code.startsWith('$2b$')) {
         this.code = await hashPassword(this.code);
     }
@@ -74,7 +74,7 @@ OtpTokenSchema.pre('save', async function (next) {
 const updateHooks = ['findOneAndUpdate', 'updateOne', 'updateMany', 'findByIdAndUpdate'];
 
 updateHooks.forEach((hook) => {
-    OtpTokenSchema.pre(hook, async function (next) {
+    OtpSchema.pre(hook, async function (next) {
         const update = this.getUpdate();
         await transformOtpUpdate(update);// call the transform logic
         this.setUpdate(update); // replace the olf value with the new one
@@ -82,7 +82,7 @@ updateHooks.forEach((hook) => {
     });
 });
 
-const OtpToken = mongoose.model('OtpTokens', OtpTokenSchema);
+const Otp = mongoose.model('Otps', OtpSchema);
 
-export default OtpToken;
+export default Otp;
 
