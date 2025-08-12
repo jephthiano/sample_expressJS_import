@@ -4,6 +4,7 @@ import { register, sendOtp, verifyOtp, signup, resetPassword} from '#validator_u
 import { loginJoi } from '#validator_util/joi/auth.joi.js';
 import { parseMessageToObject } from '#main_util/general.util.js';
 import { setTokenCookie } from '#src/utils/mains/cookie.util.js';
+import { isValidOtpMedium } from '#src/utils/mains/otp.util.js';
 
 
 class AuthController extends BaseController{
@@ -47,7 +48,7 @@ class AuthController extends BaseController{
         const { type } = req.params;
 
         try {
-            if(type !== 'sign_up' && type !== 'forgot_password') this.triggerError("Invalid Request", []);
+            if(!isValidOtpMedium(type)) this.triggerError("Invalid Request", []); // check if it is a valid otp medium
 
             //validate inputs
             const { status, data } = await sendOtp(req.body, type);
@@ -66,7 +67,7 @@ class AuthController extends BaseController{
         const { type } = req.params;
 
         try {
-            if (type !== 'sign_up' && type !== 'forgot_password') this.triggerError("Invalid Request", []);
+            if(!isValidOtpMedium(type)) this.triggerError("Invalid Request", []); // check if it is a valid otp medium
 
             // validate inputs
             const { status, data } = await verifyOtp(req.body, type);
