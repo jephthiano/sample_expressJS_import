@@ -64,11 +64,9 @@ class AuthService{
 
     // [VERIFY OTP]
     static async verifyOtp(req, use_case) {
+        const {code, receiving_medium } = req.body;
         const data = {
-            receiving_medium: req.body.receiving_medium,
-            code: req.body.code,
-            use_case,
-        };
+            receiving_medium, code, use_case, };
 
         await verifyNewOtp(data);
 
