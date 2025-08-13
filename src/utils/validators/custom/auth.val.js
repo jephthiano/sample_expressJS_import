@@ -1,5 +1,5 @@
 import { findUserByEmailOrPhone , findEmailMobileNumberUsername} from '#database/mongo/user.db.js';
-import { isEmptyObject, isEmptyString, replaceValues, isPhoneSample } from '#main_util/general.util.js';
+import { isEmptyObject, isEmptyString, replaceValues } from '#main_util/general.util.js';
 import { validateInput, validatePassword } from '#main_util/security.util.js';
 
 // Utility function for response formatting
