@@ -4,6 +4,7 @@ import { register, sendOtp, verifyOtp, signup, resetPassword} from '#validator_u
 import { loginJoi } from '#validator_util/joi/auth.joi.js';
 import { parseMessageToObject } from '#main_util/general.util.js';
 import { setTokenCookie } from '#src/utils/mains/cookie.util.js';
+import { isValidOtpParam } from '#src/utils/mains/otp.util.js';
 
 
 class AuthController extends BaseController{
@@ -14,7 +15,7 @@ class AuthController extends BaseController{
 
             // Validate inputs using Joi DTO
             const { error, value } = loginJoi.validate(req.body, { abortEarly: false });
-            if (error) this.triggerValidationError(parseMessageToObject(error));
+            if (error) this.triggerValidationError(parseMessageToObject(error.details));
             
             const response = await AuthService.login(req);
 
@@ -30,7 +31,7 @@ class AuthController extends BaseController{
     static async register(req, res) {
         try {
             //validate inputs
-            const { status, data } = await register(req.body, 'single');
+            const { status, data } = await register(req.body);
             if (status) this.triggerValidationError(data);
 
             const response = await AuthService.register(req);
@@ -47,7 +48,7 @@ class AuthController extends BaseController{
         const { type } = req.params;
 
         try {
-            if(type !== 'sign_up' && type !== 'forgot_password') this.triggerError("Invalid Request", []);
+            if(!isValidOtpParam(type)) this.triggerError("Invalid Request", []); // check if it is a valid otp medium
 
             //validate inputs
             const { status, data } = await sendOtp(req.body, type);
@@ -66,7 +67,7 @@ class AuthController extends BaseController{
         const { type } = req.params;
 
         try {
-            if (type !== 'sign_up' && type !== 'forgot_password') this.triggerError("Invalid Request", []);
+            if(!isValidOtpParam(type)) this.triggerError("Invalid Request", []); // check if it is a valid otp medium
 
             // validate inputs
             const { status, data } = await verifyOtp(req.body, type);
@@ -84,7 +85,7 @@ class AuthController extends BaseController{
     static async signup(req, res) {
         try {
             //validate inputs
-            const { status, data } = await signup(req.body, 'multi');
+            const { status, data } = await signup(req.body);
             if (status) this.triggerValidationError(data);
 
             const response =  await AuthService.signup(req);

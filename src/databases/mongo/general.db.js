@@ -1,5 +1,5 @@
 import User from '#model/User.schema.js';
-import OtpToken from '#model/OtpToken.schema.js';
+import Otp from '#src/models/Otp.schema.js';
 import Token from '#model/Token.schema.js';
 import { triggerError} from '#core_util/handler.util.js';
 
@@ -26,7 +26,7 @@ const updateSingleField = async (collectionName, whereField, whereValue, updateF
 };
 
 const getModel = (modelName) => {
-    const models = { User, OtpToken, Token }; // Add other models here
+    const models = { User, Otp, Token }; // Add other models here
     return models[modelName] || null;
 };
 

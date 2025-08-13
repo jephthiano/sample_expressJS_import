@@ -4,6 +4,14 @@ import { sendMessage } from '#main_util/messaging.util.js';
 import { findOneOtpData, storeOtp, updateOtpStatus, deleteManyOtp }from '#database/mongo/otp.db.js';
 import { triggerError} from '#core_util/handler.util.js';
 
+
+// IS IT VALID OTP MEDIUM
+
+const isValidOtpParam =  async (type) => {
+    return ['sign_up', 'forgot_password'].includes(type);
+}
+
+
 // SEND OTP
 const sendOtp = async (messageData) => {
     let response = false;
@@ -69,6 +77,7 @@ const deleteOtp = async (receiving_medium) => {
 };
 
 export {
+    isValidOtpParam,
     sendOtp,
     verifyNewOtp,
     verifyUsedOtp,

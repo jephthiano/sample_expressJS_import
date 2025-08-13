@@ -1,7 +1,7 @@
 {
-  "name": "Sample Api Express JS (Import)",
+  "name": "sample-api-express-js-import",
   "version": "1.0.0",
-  "description": "",
+  "description": "A boilerplate Express.js (ESM `import) API project for rapid backend development. This project is designed to help you kickstart any API-based service quickly, with built-in user authentication and OTP-based signup options. this project is designed with clean architecture",
   "main": "server.js",
   "author": "jephthah oladejo",
   "license": "ISC",
