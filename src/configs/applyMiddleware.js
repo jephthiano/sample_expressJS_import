@@ -5,10 +5,13 @@ import helmet from 'helmet';
 import xss from 'xss-clean';
 import mongoSanitize from 'express-mongo-sanitize';
 import rateLimit from 'express-rate-limit';
+import { getEnvorThrow } from '#src/utils/mains/general.util.js';
+
+//const CLIENT_URL = getEnvorThrow('CLIENT_URL');
 
 const applyMiddleware = function (app) {
     const corsOptions = {
-        origin: process.env.CLIENT_URL,
+        origin: '*', //CLIENT_URL
         allowedHeaders: "",
         credentials: true,
         methods: ['GET', 'POST', 'DELETE', 'PUT']

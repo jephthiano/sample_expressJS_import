@@ -1,8 +1,9 @@
 import Token from '#model/Token.schema.js';
 import { selEncrypt }  from '#main_util/security.util.js';
 import { generateUniqueToken }  from '#main_util/security.util.js';
+import { getEnvorThrow } from '#src/utils/mains/general.util.js';
 
-const tokenExpiry = parseInt(process.env.TOKEN_EXPIRY);
+const TOKEN_EXPIRY = getEnvorThrow('TOKEN_EXPIRY');
 
 const dbFindUnexpiredToken = async (token)=> {
     token = selEncrypt(token, 'token');
@@ -17,7 +18,7 @@ const dbUpdateOrCeateToken = async (userId) => {
             { user_id: userId },
             {
                 token,
-                expire_at: new Date(Date.now() + tokenExpiry)
+                expire_at: new Date(Date.now() + TOKEN_EXPIRY)
             },
             {
                 new: true,
@@ -33,7 +34,7 @@ const DbRenewToken = async (userId) => {
     const renew = await Token.findOneAndUpdate(
         { user_id: userId },
         {
-            expire_at: new Date(Date.now() + tokenExpiry)
+            expire_at: new Date(Date.now() + TOKEN_EXPIRY)
         },
     );
 

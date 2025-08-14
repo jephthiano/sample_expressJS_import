@@ -1,8 +1,9 @@
 import { redis } from '#config/redis.js'; 
 import { selEncrypt }  from '#main_util/security.util.js';
 import { generateUniqueToken }  from '#main_util/security.util.js';
+import { getEnvorThrow } from '#src/utils/mains/general.util.js';
 
-const tokenExpiry = parseInt(process.env.TOKEN_EXPIRY)
+const TOKEN_EXPIRY = getEnvorThrow('TOKEN_EXPIRY');
  
  const redisGetUserIdByToken = async (token) => {
    const encryptedToken = selEncrypt(token, 'token');
@@ -25,8 +26,8 @@ const tokenExpiry = parseInt(process.env.TOKEN_EXPIRY)
       if (oldToken) pipeline.del(`auth:token:${oldToken}`);
 
       // Set new mappings with expiration
-      pipeline.set(`auth:user:${userId}`, encryptedToken, 'EX', tokenExpiry);
-      pipeline.set(`auth:token:${encryptedToken}`, userId, 'EX', tokenExpiry);
+      pipeline.set(`auth:user:${userId}`, encryptedToken, 'EX', TOKEN_EXPIRY);
+      pipeline.set(`auth:token:${encryptedToken}`, userId, 'EX', TOKEN_EXPIRY);
       const results = await pipeline.exec();
 
       // Extract results for the last two commands (set operations)
@@ -43,8 +44,8 @@ const tokenExpiry = parseInt(process.env.TOKEN_EXPIRY)
    const encryptedToken = selEncrypt(token, 'token');
     const pipeline = redis.pipeline();
 
-    pipeline.expire(`auth:token:${encryptedToken}`, tokenExpiry);
-    pipeline.expire(`auth:user:${userId}`, tokenExpiry);
+    pipeline.expire(`auth:token:${encryptedToken}`, TOKEN_EXPIRY);
+    pipeline.expire(`auth:user:${userId}`, TOKEN_EXPIRY);
     const results = await pipeline.exec();
 
     const [tokenResult, userResult] = results;
