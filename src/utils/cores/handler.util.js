@@ -1,5 +1,13 @@
 import { ValidationError, CustomApiException } from '#core_util/errors.util.js';
 
+const getEnvorThrow = (key) => {
+    const val = process.env[key];
+    if (!val) triggerError("Error occurred on the server", [], 500);
+    
+    return val;
+}
+
+const NODE_ENV = getEnvorThrow('NODE_ENV');
 /**
  * Send a standardized JSON response.
  */
@@ -18,19 +26,6 @@ function sendResponse(res, data = {}, message = "OK", status = true, error = [],
  */
 function handleException(res, error) {
 
-  // Defensive null/undefined check
-  // if (!error || typeof error !== 'object') {
-  
-  //   return sendResponse(
-  //     res,
-  //     {},
-  //     'An unknown error occurred',
-  //     false,
-  //     process.env.NODE_ENV === 'development' ? [{ error: String(error) }] : [],
-  //     500
-  //   );
-  // }
-
   // for validation error
   if (error instanceof ValidationError) {
     return sendResponse(res, {}, error.message, false, error.errors, 422);
@@ -38,7 +33,7 @@ function handleException(res, error) {
 
   // for database error
   if (error.name === "SequelizeDatabaseError" || error.name === "MongoError") {
-    const errorData = process.env.NODE_ENV === "development"
+    const errorData = NODE_ENV === "development"
                         ? { stack: error.stack, message: error?.message ?? null }
                         : [];
     return sendResponse(res, {}, "Something went wrong", false, errorData, 500);
@@ -50,7 +45,7 @@ function handleException(res, error) {
   }
 
   // fallback
-  const errorData = process.env.NODE_ENV === "development"
+  const errorData = NODE_ENV === "development"
                       ? { message: error.message, stack: error.stack }
                       : [];
   return sendResponse(res, {}, "Something went wrong", false, errorData, 500);

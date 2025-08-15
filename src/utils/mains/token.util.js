@@ -3,6 +3,10 @@ import { dbFindUnexpiredToken, dbDeleteToken, dbUpdateOrCeateToken, DbRenewToken
 import { redisGetUserIdByToken, redisDeleteToken, redisCreateToken, redisRenewToken, } from '#database/redis/token.db.js';
 import { createJwtToken, renewJwtToken, validateJwtToken } from '#service_util/validation/jwt.js';
 import { extractCookieToken } from '#main_util/cookie.util.js';
+import { getEnvorThrow } from '#src/utils/mains/general.util.js';
+
+const TOKEN_SETTER = getEnvorThrow('TOKEN_SETTER');
+const TOKEN_TYPE = getEnvorThrow('TOKEN_TYPE');
 
 // Generate Token with expiration
 const setApiToken = async (id) => {
@@ -16,13 +20,11 @@ const validateApiToken = async (req) => {
     
     let userId = null;
 
-    const setter = process.env.TOKEN_SETTER;
-
-    if (setter === 'jwt') {
+    if (TOKEN_SETTER === 'jwt') {
         userId = await validateJwtToken(token);
-    } else if (setter === 'local_self') {
+    } else if (TOKEN_SETTER === 'local_self') {
         userId = await dbFindUnexpiredToken(token);
-    } else if (setter === 'redis_self') {
+    } else if (TOKEN_SETTER === 'redis_self') {
         userId = await redisGetUserIdByToken(token)
     } else {
         triggerError(`Unsupported Request`, [], 400);
@@ -44,11 +46,11 @@ const deleteApiToken = async (req) => {
     const token = getApiToken(req);
     if(!token) return false;
 
-    if (process.env.TOKEN_SETTER === 'jwt') {
+    if (TOKEN_SETTER === 'jwt') {
         status = true; // not available
-    } else if (process.env.TOKEN_SETTER === 'local_self') {
+    } else if (TOKEN_SETTER === 'local_self') {
         status = await dbDeleteToken(token)
-    } else if (process.env.TOKEN_SETTER === 'redis_self') {
+    } else if (TOKEN_SETTER === 'redis_self') {
         status = await redisDeleteToken(token);
     }
 
@@ -58,7 +60,7 @@ const deleteApiToken = async (req) => {
 
 //get the token
 const getApiToken = (req) => {
-    const token = process.env.TOKEN_TYPE === 'bearer' 
+    const token = TOKEN_TYPE === 'bearer' 
                     ? extractBearerToken(req) 
                     : extractCookieToken(req);
 
@@ -83,7 +85,7 @@ const  generateToken = async (userId) => {
             redis_self: () => redisCreateToken(userId),
         };
 
-        const method = process.env.TOKEN_SETTER;
+        const method = TOKEN_SETTER;
         return methods[method] ? await methods[method]() : null;
 }
 
@@ -95,7 +97,7 @@ const autoRenewTokenTime = async(userId, token) => {
         redis_self: () => redisRenewToken(userId, token),
     };
 
-    const method = process.env.TOKEN_SETTER;
+    const method = TOKEN_SETTER;
     return methods[method] ? await methods[method]() : null;
 }
 

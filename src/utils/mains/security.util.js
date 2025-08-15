@@ -3,15 +3,17 @@ import cryptoJS from 'crypto-js';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
 import { queueRehash } from '#queue/rehashQueue.js';
+import { getEnvorThrow } from '#src/utils/mains/general.util.js';
 
-const key = process.env.ENC_KEY;
-const iv = process.env.ENC_IV;
-// const method = process.env.ENC_METHOD; // Encryption method
-const cost = process.env.HASH_COST;
+const ENC_KEY = getEnvorThrow('ENC_KEY');
+const ENC_IV = getEnvorThrow('ENC_IV');
+const HASH_COST = getEnvorThrow('HASH_COST');
+// const ENC_METHOD = getEnvorThrow('ENC_METHOD'); // Encryption method
+
 const enc_array = ['general', 'token', 'receiving_medium'];
 
 // Hash password asynchronously
-const hashPassword = async (password) => await bcrypt.hash(password, 10);
+const hashPassword = async (password) => await bcrypt.hash(password, HASH_COST);
 
 // Verify password asynchronously
 const verifyPassword = async (plainPassword, hashedPassword, userId = null) => {
@@ -27,7 +29,7 @@ const verifyPassword = async (plainPassword, hashedPassword, userId = null) => {
 
 const passwordNeedRehash = (hashedPassword) => {
     const currentRounds = parseInt(hashedPassword.split('$')[2], 10); // split by $
-    return currentRounds !== parseInt(cost);
+    return currentRounds !== parseInt(HASH_COST);
 }
 
 // Encrypt only if type exists in enc_array
@@ -38,14 +40,14 @@ const selDecrypt = (data, type = 'general') => enc_array.includes(type) ? decryp
 
 const encrypt = (data) => cryptoJS.AES.encrypt(
     data,
-    cryptoJS.enc.Utf8.parse(key),
-    { iv: cryptoJS.enc.Utf8.parse(iv) }
+    cryptoJS.enc.Utf8.parse(ENC_KEY),
+    { iv: cryptoJS.enc.Utf8.parse(ENC_IV) }
 ).toString();
 
 const decrypt = (data) => cryptoJS.AES.decrypt(
     data,
-    cryptoJS.enc.Utf8.parse(key),
-    { iv: cryptoJS.enc.Utf8.parse(iv) }
+    cryptoJS.enc.Utf8.parse(ENC_KEY),
+    { iv: cryptoJS.enc.Utf8.parse(ENC_IV) }
 ).toString(cryptoJS.enc.Utf8);
 
 const validateInput = (data, type) => {
