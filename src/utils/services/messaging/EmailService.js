@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { sendMessageDTO } from '#dto/messaging.dto.js';
+import { sendMessageDTO } from '#src/dtos/core/messaging.dto.js';
 import { getEnvorThrow } from '#src/utils/mains/general.util.js';
 
 class EmailService {
