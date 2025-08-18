@@ -1,5 +1,5 @@
 import FetchRepository from '#repository/FetchRepository.cla.js';
-import { setApiToken, getApiToken } from '#main_util/token.util.js';
+import { setApiToken } from '#main_util/token.util.js';
 import UserResource from '#resource/UserResource.js';
 import { triggerError} from '#core_util/handler.util.js';
 
@@ -17,10 +17,9 @@ class FetchService{
         return {};
     }
 
-    static async appFetchData (req){
+    static async appFetchData (userId, token){
         //get user data
-        const user = await FetchRepository.getUserById(req.user.id);
-        const token = getApiToken(req); // change to get token
+        const user = await FetchRepository.getUserById(userId);
 
         if(token && user){
             const data = new UserResource(user).toJSON();
