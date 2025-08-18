@@ -4,17 +4,16 @@ import { getApiToken } from '#main_util/token.util.js';
 
 
 class FetchController extends BaseController{
-    static async authFetchData (id){
-        return await FetchService.authFetchData(id);
+    static async authFetchData (userData){
+        return await FetchService.authFetchData(userData);
     }
 
     static async appFetchData (req, res){
         try{
             const userId = req.user.id
-            const token = getApiToken(req); // change to get token
+            const token = getApiToken(req);
 
             if (!userId || !token) this.triggerError("Request failed, try again", [], 400);
-
 
             const response = await FetchService.appFetchData(userId, token);
 

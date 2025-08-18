@@ -6,7 +6,7 @@ import { parseMessageToObject } from '#main_util/general.util.js';
 import { setTokenCookie } from '#src/utils/mains/cookie.util.js';
 import { isValidOtpParam } from '#src/utils/mains/otp.util.js';
 import { getApiToken } from '#main_util/token.util.js';
-import { LoginInputDto, registerInputDto, sendOtpInputDto, verifyOtpInputDto, signupInputDto, resetPasswordInputDto } from '#src/dtos/input/auth.dto.js';
+import { loginInputDto, registerInputDto, sendOtpInputDto, verifyOtpInputDto, signupInputDto, resetPasswordInputDto } from '#src/dtos/input/auth.dto.js';
 
 
 class AuthController extends BaseController{
@@ -20,7 +20,7 @@ class AuthController extends BaseController{
             if (error) this.triggerValidationError(parseMessageToObject(error.details));
             
             // pass pure data from dto [not raw data]
-            const inputData = LoginInputDto(req.body);
+            const inputData = loginInputDto(req.body);
 
             const response = await AuthService.login(inputData);
 

@@ -5,12 +5,11 @@ import { triggerError} from '#core_util/handler.util.js';
 
 
 class FetchService{
-    static async authFetchData (user){
-        //get user data
-        const token = user ? await setApiToken(user.id) : null ;
+    static async authFetchData (userData){
+        const token = userData ? await setApiToken(userData.id) : null ;
 
-        if(token && user){
-            const data = new UserResource(user).toJSON();
+        if(token && userData){
+            const data = new UserResource(userData).toJSON();
             return {token, data};
         }
 

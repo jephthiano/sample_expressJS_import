@@ -1,4 +1,6 @@
-const  LoginInputDto = (data = {}) => {
+import { validateInput } from "#src/utils/mains/security.util.js";
+
+const  loginInputDto = (data = {}) => {
     return {
         login_id: data.login_id.trim().toLowerCase(),
         password: data.password,
@@ -35,20 +37,10 @@ const verifyOtpInputDto = (data = {}) => {
 const signupInputDto = (data = {}) => {
     const veriType = validateInput(data.receiving_medium, 'mobile_number') ? 'mobile_number' : 'email'
                 
-    let email; 
-    let mobile_number; 
-    let email_verified_at = null; 
-    let mobile_number_verified_at = null
-
-    if (veriType === 'email') {
-        mobile_number = data.mobile_number?.trim();
-        email = data.receiving_medium.trim().toLowerCase();
-        email_verified_at = new Date();
-    } else {
-        email = data.email?.trim().toLowerCase();
-        mobile_number = data.receiving_medium;
-        mobile_number_verified_at = new Date();
-    }
+    const email = (veriType === 'email')  ? data.receiving_medium.trim().toLowerCase() : data.email?.trim().toLowerCase();
+    const mobile_number = (veriType === 'mobile_number') ? data.receiving_medium?.trim() : data.mobile_number?.trim();
+    const email_verified_at = (veriType === 'email') ? new Date() : null;
+    const mobile_number_verified_at = (veriType === 'mobile_number') ? new Date() : null;
 
     return {
         receiving_medium: data.receiving_medium.trim().toLowerCase(),
@@ -76,7 +68,7 @@ const resetPasswordInputDto = (data = {}) => {
 
 
 export { 
-    LoginInputDto,
+    loginInputDto,
     registerInputDto,
     sendOtpInputDto,
     verifyOtpInputDto,

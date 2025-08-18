@@ -1,6 +1,6 @@
 import { findSingleValue } from '#database/mongo/general.db.js';
 import User from '#model/User.schema.js';
-import { selEncrypt, selDecrypt }  from '#main_util/security.util.js';
+import { selEncrypt }  from '#main_util/security.util.js';
 import { createUserDTO, updatePasswordDTO } from '#src/dtos/core/user.dto.js';
 
 const findUserByID = async (userId) => {
@@ -52,10 +52,7 @@ const resetUserPaswword = async(data) => {
         
         if(!user) return null;
 
-        return {
-            email: selDecrypt(user.email, 'email'),
-            first_name: selDecrypt(user.first_name, 'first_name'),
-        };
+        return user ?? null;
 }
 
 export {
