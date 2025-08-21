@@ -10,8 +10,16 @@
     "start": "node server.js",
     "start:worker": "node ./src/workers/index.js",
     "dev": "nodemon server.js",
-    "dev:worker": "nodemon ./src/workers/index.js"
+    "dev:worker": "nodemon ./src/workers/index.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:unit": "jest tests/unit",
+    "test:feature": "jest tests/feature"
   },
+  "files": [
+    "src",
+    "server.js",
+    "package.json"
+  ],
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bullmq": "^5.52.2",
@@ -57,6 +65,8 @@
     "#service_util/*": "./src/utils/services/*"
   },
   "devDependencies": {
-    "nodeman": "^1.1.2"
+    "jest": "^30.0.5",
+    "nodeman": "^1.1.2",
+    "supertest": "^7.1.4"
   }
 }

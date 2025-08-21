@@ -1,4 +1,4 @@
-import { isEmptyObject, isEmptyString } from '#main_util/general.util.js';
+import { isEmptyObject, isValidData } from '#main_util/general.util.js';
 import { validateInput } from '#main_util/security.util.js';
 import { findUserSingleValuebyEncField, }from '#database/mongo/user.db.js';
 
@@ -14,7 +14,7 @@ const validateEmailChange = async ({ email }, userData) => {
     const emailExists = await findUserSingleValuebyEncField('User', 'email', email, 'email');
 
     // Validate email
-    if (!email || isEmptyString(email)) {
+    if (!isValidData(email)) {
         errors.email = "Email is required";
     } else if (!validateInput(email, 'email')) {
         errors.email = "Invalid email format";
@@ -33,7 +33,7 @@ const validateUsernameChange = async ({ username }, userData) => {
     const usernameExists = await findUserSingleValuebyEncField('User', 'username', username, 'username');
 
     // Validate username
-    if (!username || isEmptyString(username)) {
+    if (!isValidData(username)) {
         errors.username = "Username is required";
     } else if (!validateInput(username, 'username')) {
         errors.username = "Username should be between 5 to 10 alphabets";

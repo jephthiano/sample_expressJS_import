@@ -2,7 +2,7 @@ import '#config/env.js';
 import { connectDB, mongoose } from '#config/database.js';// Connect to DB
 import { log } from '#main_util/logger.util.js';// Logger
 import app from '#src/app.js'; // Import Express app
-import { getEnvorThrow } from '#src/utils/mains/general.util.js';
+import { getEnvorThrow } from '#main_util/general.util.js';
 
 const PORT = getEnvorThrow('PORT');
 

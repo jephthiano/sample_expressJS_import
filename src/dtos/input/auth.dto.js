@@ -17,6 +17,9 @@ const registerInputDto = (data = {}) => {
         last_name: data.last_name,
         gender: data.gender.trim().toLowerCase(),
         password: data.password,
+        email_verified_at: null,
+        mobile_number_verified_at: null,
+
     }
 }
 
