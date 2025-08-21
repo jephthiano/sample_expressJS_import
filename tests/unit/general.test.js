@@ -153,22 +153,38 @@ describe("Check if the passed time has expired or not", () => {
 
 // parseMessageToObject
 
-describe("Test that function can pass Joi Message into specified object", () => {
-  test("should return true if function parses the data into the expected result", () => {
+describe("parseMessageToObject", () => {
+  test("converts Joi error details into an object", () => {
     const errorDetails = [
       { path: ["email"], message: "Email is required" },
       { path: ["username"], message: "Username must be at least 3 characters" },
-      { path: ["password"], message: "Password is too weak" }
+      { path: ["password"], message: "Password is too weak" },
     ];
 
     const expected = {
       email: "Email is required",
       username: "Username must be at least 3 characters",
-      password: "Password is too weak"
+      password: "Password is too weak",
     };
 
     const result = parseMessageToObject(errorDetails);
 
-    expect(result).toEqual(expected); // ✅ use toEqual, not toBe
+    expect(result).toEqual(expected); // ✅ deep comparison
+  });
+
+  test("returns empty object if no errors", () => {
+    const errorDetails = [];
+    const result = parseMessageToObject(errorDetails);
+    expect(result).toEqual({});
+  });
+
+  test("uses first element of path as key", () => {
+    const errorDetails = [
+      { path: ["user", "email"], message: "Invalid email" }
+    ];
+
+    const result = parseMessageToObject(errorDetails);
+
+    expect(result).toEqual({ user: "Invalid email" });
   });
 });
