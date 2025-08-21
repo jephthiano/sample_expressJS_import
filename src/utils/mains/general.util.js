@@ -23,6 +23,7 @@ const replaceValues = (data, value, replace) => {
 const ucFirst = (data) => data.charAt(0).toUpperCase() + data.slice(1);
 
 const isDateLapsed = (givenDate, duration = 0, checkDate = new Date()) => {
+    // return true if date has expired
     const milliDuration = 1000 * duration;
     return new Date(givenDate).getTime() + milliDuration < checkDate.getTime();
 };

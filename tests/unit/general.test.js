@@ -1,5 +1,5 @@
 import '#config/env.js';
-import { getEnvorThrow, isEmptyObject, isEmptyString, isValidData, replaceValues, inArray } from '#main_util/general.util.js';
+import { getEnvorThrow, isEmptyObject, isEmptyString, isValidData, replaceValues, inArray, ucFirst, isDateLapsed, parseMessageToObject } from '#main_util/general.util.js';
 
 // getEncorThrow
 describe("getEnvorThrow", () => {
@@ -93,24 +93,82 @@ describe("In Array", () => {
 
 // replaceValues
 describe("Replace Values", () => {
-    test("should return false if the value is replaced and does not match the old value", () => {
-    const result = replaceValues('what is name', ' ', '-');
-    expect(result).toBe('what is name');
-  });
-
   test("should return true if the value is replaced and it matches expected result", () => {
     const result = replaceValues('what is name', ' ', '-');
     expect(result).toBe('what-is-name');
+  });
+
+  test("should return false if the value is replaced and does not match the old value", () => {
+    const result = replaceValues('what is name', ' ', '-');
+    expect(result).not.toBe('what is name');
   });
 });
 
 
 // ucFirst
+describe("First Char of string to uppercase", () => {
+  test("should return true if the first char is changed and it matches expected result", () => {
+    const result = ucFirst('testing');
+    expect(result).toBe('Testing');
+  });
+
+  test("should return false if the first char is changed and does not match the old value", () => {
+    const result = ucFirst('testing');
+    expect(result).not.toBe('testing');
+  });
+});
 
 
 
 // isDateLapsed
+describe("Check if the passed time has expired or not", () => {
+  test("should return true if the given time has lapsed [Expired]", () => {
+    const thirtySecondsAgo = new Date(Date.now() - 30 * 1000);
+    const result = isDateLapsed(thirtySecondsAgo);
+    expect(result).toBe(true);
+  });
+
+  test("should return true if the given time has not lapsed [Not Expired]", () => {
+    const fiveSecondsPlus = new Date(Date.now() + 5 * 1000);
+    const result = isDateLapsed(fiveSecondsPlus);
+    expect(result).toBe(false);
+  });
+
+  test("should return true if the given time is less than expire time [Expired]", () => {
+    expired = new Date()
+    const OneSecondsAgo = new Date(Date.now() - 1 * 1000);
+    const result = isDateLapsed(OneSecondsAgo, 0 , expired);
+    expect(result).toBe(true);
+  });
+
+  test("should return true if the given time is greater than expire time [Not Expired]", () => {
+    expired = new Date(Date.now() - 5 * 1000)
+    const plusSecondsPlus = new Date(Date.now() - 4 * 1000);
+    const result = isDateLapsed(plusSecondsPlus, 0, expired);
+    expect(result).toBe(false);
+  });
+});
 
 
 
 // parseMessageToObject
+
+describe("Test that function can pass Joi Message into specified object", () => {
+  test("should return true if function parses the data into the expected result", () => {
+    const errorDetails = [
+      { path: ["email"], message: "Email is required" },
+      { path: ["username"], message: "Username must be at least 3 characters" },
+      { path: ["password"], message: "Password is too weak" }
+    ];
+
+    const expected = {
+      email: "Email is required",
+      username: "Username must be at least 3 characters",
+      password: "Password is too weak"
+    };
+
+    const result = parseMessageToObject(errorDetails);
+
+    expect(result).toEqual(expected); // ✅ use toEqual, not toBe
+  });
+});
